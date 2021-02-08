@@ -57,18 +57,18 @@ The integration is already configured to work with VirtoCommerce live demo site 
 - [x] I want to edit the quantity of the product in a Cart Page.
 
 ### Checkout (WIP)
-- [] I want to proceed to the checkout So I can place the order
-- [] I want to be redirected to the thank you page after placing an order.
-- [] I want to create a guest order.
-- [] I want to select shipping address.
-- [] I want to select billing address.
-- [] I want to select a payment method.
-- [] I want to select a shipping method.
+- [ ] I want to proceed to the checkout So I can place the order
+- [ ] I want to be redirected to the thank you page after placing an order.
+- [ ] I want to create a guest order.
+- [ ] I want to select shipping address.
+- [ ] I want to select billing address.
+- [ ] I want to select a payment method.
+- [ ] I want to select a shipping method.
 - [ ] I want to apply coupon code.
 - [ ] I want to proceed my payment with external service.
 ### Thank You Page
 
-- [] I want to see the thank you page so I am sure the order was placed successfully.
+- [ ] I want to see the thank you page so I am sure the order was placed successfully.
 
 ### User Management
 
