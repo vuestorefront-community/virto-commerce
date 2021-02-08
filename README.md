@@ -110,9 +110,8 @@ The integration is already configured to work with VirtoCommerce live demo site 
 2. Change this line, set the uri where is your Virto platform is running
 ```JS
 //Set with the url where target VC platform is running. 
-//The VSF/next application is plays a revers-proxy for all incoming requests and proxy to specified url
-//this is required to avoid of issues with CORS and in the future hiding the user sensitive data from the client along with
-//more flexible routing settings
+//The VSF/next application plays a reverse-proxy for all incoming graphql requests and proxy to specified url where vc platform is running.
+//This is mandatory to avoid CORS issues and for more flexible  routing settings for VC platform endpoints.
 const vcUpstreamEndpointUri = "https://admin-demo.virtocommerce.com";
 ```
    
