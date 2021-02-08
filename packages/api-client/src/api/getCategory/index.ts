@@ -1,7 +1,6 @@
-import { CustomQuery } from '@vue-storefront/core';
+import { Category } from '../../types';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default async function getCategory(context, params, customQuery?: CustomQuery) {
+export default async function getCategory(): Promise<Category[]> {
   return Promise.resolve([
     {
       id: 1,

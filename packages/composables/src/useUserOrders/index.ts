@@ -1,22 +1,17 @@
 /* istanbul ignore file */
 
-import {
-  Context,
-  useUserOrdersFactory,
-  UseUserOrdersFactoryParams
-} from '@vue-storefront/core';
-import { OrdersResponse, OrderSearchParams } from '../types';
+import { useUserOrdersFactory, UseUserOrdersFactoryParams, Context } from '@vue-storefront/core';
+import { Order, OrderSearchParams } from '../types';
+// @todo userOrders
 
-const params: UseUserOrdersFactoryParams<OrdersResponse, OrderSearchParams> = {
+const params: UseUserOrdersFactoryParams<Order[], OrderSearchParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  searchOrders: async (context: Context, params: OrderSearchParams): Promise<OrdersResponse> => {
-    console.log('Mocked: searchOrders');
+  searchOrders: async (context: Context, params: OrderSearchParams = {}): Promise<any> => {
+    const result =  await context.$vc.api.getMyOrders(params);
 
-    return {
-      data: [],
-      total: 0
-    };
+      return result.data.items;
+   
   }
 };
 
-export default useUserOrdersFactory<OrdersResponse, OrderSearchParams>(params);
+export default useUserOrdersFactory<Order[], OrderSearchParams>(params);

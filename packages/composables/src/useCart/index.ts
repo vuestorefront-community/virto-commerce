@@ -1,60 +1,55 @@
-/* istanbul ignore file */
+import { useCartFactory, UseCartFactoryParams, Context, AgnosticCoupon } from '@vue-storefront/core';
+import { ref, Ref } from '@vue/composition-api';
+import { CartType, LineItemType, Product } from '@vue-storefront/virtocommerce-api';
 
-import {
-  Context,
-  useCartFactory,
-  UseCartFactoryParams
-} from '@vue-storefront/core';
-import { Cart, CartItem, Coupon, Product } from '../types';
 
-const params: UseCartFactoryParams<Cart, CartItem, Product, Coupon> = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  load: async (context: Context, { customQuery }) => {
-    console.log('Mocked: loadCart');
-    return {};
-  },
+const getLineItemItemByProduct = ({ currentCart, product }) => {
+  return currentCart.items.find((item) => item.productId === product._id);
+};
 
+// @todo: implement cart
+const params: UseCartFactoryParams<CartType, LineItemType, Product, AgnosticCoupon> = { 
+
+
+  load: async (context: Context,  { customQuery }) => {
+    const cart = await context.$vc.api.getCart();
+    return cart;
+  },  
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addItem: async (context: Context, { currentCart, product, quantity, customQuery }) => {
-    console.log('Mocked: addToCart');
-    return {};
+     await context.$vc.api.addToCart(currentCart, product, quantity);
+     return  await context.$vc.api.getCart();  
   },
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   removeItem: async (context: Context, { currentCart, product, customQuery }) => {
-    console.log('Mocked: removeFromCart');
-    return {};
+    await context.$vc.api.removeFromCart(currentCart, product);
+    return await context.$vc.api.getCart();  
   },
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateItemQty: async (context: Context, { currentCart, product, quantity, customQuery }) => {
-    console.log('Mocked: updateQuantity');
-    return {};
+    await context.$vc.api.updateCartItemQuantity(currentCart, product, quantity);
+    return  await context.$vc.api.getCart();  
   },
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   clear: async (context: Context, { currentCart }) => {
-    console.log('Mocked: clearCart');
-    return {};
+    await context.$vc.api.clearCart(currentCart);
+    return await context.$vc.api.getCart();    
   },
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   applyCoupon: async (context: Context, { currentCart, couponCode, customQuery }) => {
     console.log('Mocked: applyCoupon');
-    return {updatedCart: {}, updatedCoupon: {}};
+    return {updatedCart: null, updatedCoupon: null};
   },
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   removeCoupon: async (context: Context, { currentCart, coupon, customQuery }) => {
     console.log('Mocked: removeCoupon');
-    return {updatedCart: {}};
+    return {updatedCart: null};
   },
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isOnCart: (context: Context, { currentCart, product }) => {
-    console.log('Mocked: isOnCart');
-    return false;
+   
+    return Boolean(currentCart && getLineItemItemByProduct({ currentCart, product }));
   }
 };
 
-export default useCartFactory<Cart, CartItem, Product, Coupon>(params);
+export default useCartFactory<CartType, LineItemType, Product, AgnosticCoupon>(params);

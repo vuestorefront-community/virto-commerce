@@ -1,5 +1,26 @@
-export type Cart = Record<string, unknown>;
-export type Wishlist = Record<string, unknown>;
+export type ApiConfig = {
+  uri: string;
+  accessTokenUri: string;
+}
+
+export type Config = {
+  api: ApiConfig; 
+  //userId : string;
+  currency: string;
+  locale: string;
+  store: string;  
+  getUserId: () => string;
+  setUserId: (string) => void;
+  getAccessToken: () => string;
+  setAccessToken: (string) => void;
+  catalogId: string; //it is workaround need to inference catalog id from store 
+  countries: ['USA', "Russia"]
+}
+
+
+
+export type Cart = {}
+export type Wishlist = {}
 export type ProductVariant = {
   _id: number;
   _description: string;
@@ -11,13 +32,13 @@ export type ProductVariant = {
     original: number;
     current: number;
   };
-};
+}
 export type Category = {
   id: number;
   name: string;
   slug: string;
   items: Category[];
-};
-export type CategoryFilter = Record<string, unknown>;
-export type ShippingMethod = Record<string, unknown>;
-export type LineItem = Record<string, unknown>;
+}
+export type CategoryFilter = {}
+export type ShippingMethod = {}
+export type LineItem = {};
